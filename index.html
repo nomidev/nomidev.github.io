@@ -43,7 +43,7 @@
 			$('.brother').text(commaNum(dbay.brother));
 			$('.balance').text(commaNum(dbay.balance));
 
-			$('.myPay').on('input',function () {
+			$('.myPay').on('keyup',function () {
 				var val = $(this).val(),
 					balance = Math.floor(2030670 / 24),
 					dividend = Math.floor(dbay.deposit / dbay.workTotal * val),
