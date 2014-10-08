@@ -2,9 +2,10 @@
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+	<title>Dbay 배당금 계산기</title>
 	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-	<script>
+	<script type="text/javascript">
 		$(function () {
 			var dbay = {
 				deposit: 170000000,
@@ -38,6 +39,8 @@
 
 			$('.workTotal').text(commaNum(dbay.workTotal));
 			$('.deposit').text(commaNum(dbay.deposit));
+			$('.nomu').text(commaNum(dbay.nomu));
+			$('.brother').text(commaNum(dbay.brother));
 			$('.balance').text(commaNum(dbay.balance));
 
 			$('.myPay').on('input',function () {
@@ -67,7 +70,7 @@
 		})
 	</script>
 	<style>
-		p > span {font-size: 12px; color: #ff6600;}
+		p > span {color: #ff6600;}
 		h3 > strong.myResult {color: red;}
 	</style>
 </head>
@@ -75,13 +78,19 @@
 	<h1>Dbay 가압류 진행 배당금 계산하기</h1>
 	<div>
 		<P>체불금품확인원에 있는 최종 금액을 넣어주세요</p>
-		<input type="text" class="myPay" placeholder="금액을 , 없이 입력해 주세요">
+		<input type="text" class="myPay" value="0" placeholder="금액을 , 없이 입력해 주세요">
 	</div>
 	<div>
-		<p>체불금품확인원 합계 : <strong class="workTotal"></strong>원</p>
-		<p>공탁금 : <strong class="deposit"></strong>원</p>
-		<p>가압류 진행 비용 잔고 : <strong class="balance"></strong>원</p>
-		<p><span>배당금과 수임료는 본인이 받을 금액 비율에 맞춰 계산되고 가압류 진행 비용은 잔고 / 24로 계산 됩니다.</span></p>
+		<p>① 체불금품확인원 합계 : <strong class="workTotal"></strong>원</p>
+		<p>② 공탁금 : <strong class="deposit"></strong>원</p>
+		<p>③ 노무사 수임료 : <strong class="nomusa"></strong>원</p>
+		<p>④ 형님 수임료 : <strong class="brother"></strong>원</p>
+		<p>⑤ 가압류 진행 비용 잔고 : <strong class="balance"></strong>원</p>
+		<p>⑥ 배당금 => ② / ① * 내 체불금품 금액</p>
+		<p>노무사 수임료 => ⑥ * (수임료(3,500,000원) / ②)</p>
+		<p>법무사 수임료 => ⑥ * (수임료(4,000,000원) / ②)</p>
+		<p>가압류 진행 비용 잔고 => ⑤ / 24</p>
+		<p><span>배당금과 수임료는 본인이 받을 금액 비율에 맞춰 계산되고 가압류 진행 비용은 ⑤ / 24로 계산 됩니다.</span></p>
 	</div>
 	<h2>내가 받을 금액은?</h2>
 	<div class="result"></div>
