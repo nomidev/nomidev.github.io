@@ -4,11 +4,13 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<script src="js/dbays.js"></script>
 	<script>
 		$(function () {
 			var dbay = {
 				deposit: 170000000,
 				workTotal: 174386070,
+				balance: 2030670,
 				nomu: 3500000,
 				brother: 4000000,
 				getNomuLegalFees: function () {
@@ -33,7 +35,11 @@
 					point += 3;  
 				}  
 				return str;  
-			}  
+			}
+
+			$('.workTotal').text(commaNum(dbay.workTotal));
+			$('.deposit').text(commaNum(dbay.deposit));
+			$('.balance').text(commaNum(dbay.balance));
 
 			$('.myPay').on('input',function () {
 				var val = $(this).val(),
@@ -43,12 +49,12 @@
 					brother = Math.floor(dividend * dbay.getBrotherLegalFees()),
 					receipt = dividend - nomusa - brother,
 					resultText = "";
-					
+
 				if(val.match(/^\d+$/)) {
 					resultText += '<p>내 배당금액: <strong>' + commaNum(dividend) + '</strong>원</p>';
 					resultText += '<p>내가 내야 할 노무사 수임료 : <strong>' + commaNum(nomusa) + '</strong>원</p>';
 					resultText += '<p>내가 내야 할 법무사 수임료 : <strong>' + commaNum(brother) + '</strong>원</p>';
-					resultText += '<p>실 수령액은 노무사, 법무사 비용을 제외한 <strong>' + commaNum(receipt) + '</strong> 원과 가압류 비용 잔액 <strong>' + commaNum(balance) + '</strong>원을 합한</p>';
+					resultText += '<p>실 수령액은 노무사, 법무사 비용을 제외한 <strong>' + commaNum(receipt) + '</strong> 원과 가압류 진행 비용 잔액 <strong>' + commaNum(balance) + '</strong>원을 합한</p>';
 					resultText += '<h3>총 <strong class="myResult">' + commaNum(receipt+balance) + '</strong>원 입니다.</h3>';
 
 					$('.result').html(resultText);
@@ -66,15 +72,15 @@
 	</style>
 </head>
 <body>
-	<h1>Dbay 가압류 진행 배당금 계산하기</h1>
+	<!-- <h1>Dbay 가압류 진행 배당금 계산하기</h1> -->
 	<div>
 		<P>체불금품확인원에 있는 최종 금액을 넣어주세요</p>
 		<input type="text" name="inputTest" class="myPay">
 	</div>
 	<div>
-		<p>체불금품확인원 합계 : <strong>174,386,070</strong>원</p>
-		<p>공탁금 : <strong>170,000,000</strong>원</p>
-		<p>가압류 진행 비용 잔고 : <strong>2,030,670</strong>원</p>
+		<p>체불금품확인원 합계 : <strong class="workTotal"></strong>원</p>
+		<p>공탁금 : <strong class="deposit"></strong>원</p>
+		<p>가압류 진행 비용 잔고 : <strong class="balance"></strong>원</p>
 		<p><span>배당금과 수임료는 본인이 받을 금액 비율에 맞춰 계산되고 가압류 진행 비용은 잔고 / 24로 계산 됩니다.</span></p>
 	</div>
 	<h2>내가 받을 금액은?</h2>
