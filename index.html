@@ -46,14 +46,15 @@
 					resultText = "";
 					
 				if(val.match(/^\d+$/)) {
-
 					resultText += '<p>내 배당금액: <strong>' + commaNum(dividend) + '</strong>원</p>';
 					resultText += '<p>내가 내야 할 노무사 수임료 : <strong>' + commaNum(nomusa) + '</strong>원</p>';
 					resultText += '<p>내가 내야 할 법무사 수임료 : <strong>' + commaNum(brother) + '</strong>원</p>';
 					resultText += '<p>실 수령액은 노무사, 법무사 비용을 제외한 <strong>' + commaNum(receipt) + '</strong> 원과 통장 잔액 <strong>' + commaNum(balance) + '</strong>원을 합한</p>';
 					resultText += '<h3>총 <strong class="myResult">' + commaNum(receipt+balance) + '</strong>원 입니다.</h3>';
-	
+
 					$('.result').html(resultText);
+				} else {
+					alert('숫자를 입력해주세요');
 				}
 			})
 
