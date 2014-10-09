@@ -50,13 +50,15 @@
 					nomusa = Math.floor(dividend * dbay.getNomuLegalFees()),
 					brother = Math.floor(dividend * dbay.getBrotherLegalFees()),
 					receipt = dividend - nomusa - brother,
+                    legalFee = nomusa + brother,
 					resultText = "";
 
 				if(val.match(/^\d+$/)) {
+                    resultText += '<h2>내가 받을 금액은?</h2>';
 					resultText += '<p>내 배당금액: <strong>' + commaNum(dividend) + '</strong>원</p>';
 					resultText += '<p>내가 내야 할 노무사 수임료 : <strong>' + commaNum(nomusa) + '</strong>원</p>';
 					resultText += '<p>내가 내야 할 법무사 수임료 : <strong>' + commaNum(brother) + '</strong>원</p>';
-					resultText += '<p>실 수령액은 노무사, 법무사 비용을 제외한 <strong>' + commaNum(receipt) + '</strong> 원과 가압류 진행 비용 잔액 <strong>' + commaNum(balance) + '</strong>원을 합한</p>';
+					resultText += '<p>실 수령액은 수임료 ' + commaNum(legalFee) + '원을 제외한 <strong>' + commaNum(receipt) + '</strong> 원과 가압류 진행 비용 잔액 <strong>' + commaNum(balance) + '</strong>원을 합한</p>';
 					resultText += '<h3>총 <strong class="myResult">' + commaNum(receipt+balance) + '</strong>원 입니다.</h3>';
 
 					$('.result').html(resultText);
@@ -81,21 +83,21 @@
 <body>
 	<h1>Dbay 공탁금 배당 계산기</h1>
 	<div>
-		<P>체불금품확인원에 있는 최종 금액을 넣어주세요</p>
+		<P>체불금품확인원에 있는 금액을 넣어주세요</p>
 		<input type="text" class="myPay" placeholder="금액을 , 없이 입력해 주세요">
 	</div>
 	<div>
 		<p>① 체불금품확인원 합계 : <strong class="workTotal"></strong>원</p>
 		<p>② 공탁금 : <strong class="deposit"></strong>원</p>
 		<p>③ 노무사 수임료 : <strong class="nomu"></strong>원</p>
-		<p>④ 형님 수임료 : <strong class="brother"></strong>원</p>
+		<p>④ 법무사 수임료 : <strong class="brother"></strong>원</p>
 		<p>⑤ 가압류 진행 비용 잔고 : <strong class="balance"></strong>원</p>
-		<p>⑥ 배당금 => <span>② / ① * 내 체불금품 금액</span></p>
-		<p>⑦ 노무사 수임료 => <span>⑥ * (수임료(3,500,000원) / ②)</span></p>
-		<p>⑧ 법무사 수임료 => <span>⑥ * (수임료(4,000,000원) / ②)</span></p>
+		<p>⑥ 배당금 => <span>(② / ①) * 내 체불금품 금액</span></p>
+		<p>⑦ 노무사 수임료 => <span>⑥ * (③ / ②)</span></p>
+		<p>⑧ 법무사 수임료 => <span>⑥ * (④ / ②)</span></p>
 		<p>⑨ 가압류 진행 비용 잔고 => <span>⑤ / 24</span></p>
+        <p><span>*수임료는 확정된 것이 아니라 임의로 산정한 것입니다.</span></p>
 	</div>
-	<h2>내가 받을 금액은?</h2>
 	<div class="result"></div>
 </body>
 </html>
