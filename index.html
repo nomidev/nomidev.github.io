@@ -51,14 +51,18 @@
 					brother = Math.floor(dividend * dbay.getBrotherLegalFees()),
 					receipt = dividend - nomusa - brother,
                     legalFee = nomusa + brother,
+                    trialCost = 150000 - balance,
 					resultText = "";
 
 				if(val.match(/^\d+$/)) {
                     resultText += '<h2>내가 받을 금액은?</h2>';
-					resultText += '<p>내 배당금액: <strong>' + commaNum(dividend) + '</strong>원</p>';
-					resultText += '<p>내가 내야 할 노무사 수임료 : <strong>' + commaNum(nomusa) + '</strong>원</p>';
-					resultText += '<p>내가 내야 할 법무사 수임료 : <strong>' + commaNum(brother) + '</strong>원</p>';
-					resultText += '<p>실 수령액은 수임료 <strong>' + commaNum(legalFee) + '</strong>원을 제외한 <strong>' + commaNum(receipt) + '</strong>원과 가압류 진행 비용 잔액 <strong>' + commaNum(balance) + '</strong>원을 합한</p>';
+                    resultText += '<h3><strong class="myResult">' + commaNum(receipt+balance) + '</strong>원 입니다.</h3>';
+					resultText += '<p>배당금액: <strong>' + commaNum(dividend) + '</strong>원</p>';
+					resultText += '<p>노무사 수임료 : <strong>' + commaNum(nomusa) + '</strong>원</p>';
+					resultText += '<p>법무사 수임료 : <strong>' + commaNum(brother) + '</strong>원</p>';
+					resultText += '<p>가압류 소송 비용 : <strong>' + commaNum(trialCost) + '</strong>원</p>';
+					resultText += '<p>총 지출 비용 : <strong>' + commaNum(nomusa + brother + trialCost) + '</strong>원</p>';
+					resultText += '<p>실 수령액은 수임료 <strong>' + commaNum(legalFee) + '</strong>원을 제외한 <strong>' + commaNum(receipt) + '</strong>원과 가압류 진행 비용 환급금 <strong>' + commaNum(balance) + '</strong>원을 합한</p>';
 					resultText += '<h3>총 <strong class="myResult">' + commaNum(receipt+balance) + '</strong>원 입니다.</h3>';
 
 					$('.result').html(resultText);
@@ -94,7 +98,7 @@
 		<p>⑥ 배당금 => <span>(② ÷ ①) × 내 체불금품 금액</span></p>
 		<p>⑦ 노무사 수임료 => <span>⑥ × (③ ÷ ②)</span></p>
 		<p>⑧ 법무사 수임료 => <span>⑥ × (④ ÷ ②)</span></p>
-		<p>⑨ 가압류 진행 비용 잔고 => <span>⑤ ÷ 24</span></p>
+		<p>⑨ 가압류 진행 비용 환급금 => <span>⑤ ÷ 24</span></p>
 		<!-- <p><span>*수임료는 확정된 것이 아니라 임의로 산정한 것입니다.</span></p> -->
 	</div>
 	<div class="result"></div>
