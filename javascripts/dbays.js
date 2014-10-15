@@ -64,7 +64,7 @@
 						legalFee = nomusa + brother,
 						resultText = "";
 						
-					console.log(recompense);
+					console.log(this.commaNum(recompense));
 
 					if(val.match(/^\d+$/)) {
 						resultText += '<h2>내가 받을 금액은?</h2>';
