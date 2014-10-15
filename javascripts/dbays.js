@@ -43,12 +43,6 @@
 			return str;
 		},
 		init: function () {
-			
-			var test = function test() {
-				console.dir(this);
-			}
-
-			test.apply(dbay);
 
 			$('.workTotal').text(this.commaNum(this.workTotal));
 			$('.deposit').text(this.commaNum(this.deposit));
@@ -69,6 +63,8 @@
 						receipt = dividend - nomusa - brother,
 						legalFee = nomusa + brother,
 						resultText = "";
+						
+					console.log(recompense);
 
 					if(val.match(/^\d+$/)) {
 						resultText += '<h2>내가 받을 금액은?</h2>';
