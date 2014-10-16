@@ -2,7 +2,7 @@
 	var dbay = {
 		deposit: 170000000,
 		workTotal: 174386070,
-		balance: 2030670,
+		balance: 2023670,
 		nomu: 3000000,
 		brother: 4000000,
 		trialCost: 150000,
