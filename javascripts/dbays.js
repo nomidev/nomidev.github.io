@@ -86,7 +86,7 @@
 						resultText += '<p>법무사 수임료 : <strong>' + this.commaNum(brother) + '</strong>원</p>';
 						resultText += '<p>가압류 소송 비용 : <strong>' + this.commaNum(this.getTrialCost()) + '</strong>원</p>';
 						resultText += '<p>총 지출 비용 : <strong>' + this.commaNum(nomusa + brother + this.getTrialCost()) + '</strong>원</p>';
-						resultText += '<p>실 수령액은 수임료 <strong>' + this.commaNum(legalFee) + '</strong>원을 제외한 <strong>' + this.commaNum(receipt) + '</strong>원과 가압류 진행 비용 환급금 <strong>' + this.commaNum(this.getBalance()) + '</strong>원을 합한</p>';
+						resultText += '<p>실 수령액은 배당금에서 수임료(노무사 + 법무사 비용) <strong>' + this.commaNum(legalFee) + '</strong>원을 제외한 <strong>' + this.commaNum(receipt) + '</strong>원과 가압류 진행 비용 환급금 <strong>' + this.commaNum(this.getBalance()) + '</strong>원을 합한</p>';
 						resultText += '<h3>총 <strong class="myResult">' + this.commaNum(receipt + this.getBalance()) + '</strong>원 입니다.</h3>';
 
 						$('.result').html(resultText);
