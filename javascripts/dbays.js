@@ -9,7 +9,7 @@
 	var dbay = dbay || {};
 
 	dbay = {
-		deposit: 170000000,
+		deposit: 171296999,
 		workTotal: 174386070,
 		balance: 2023670,
 		nomu: 3000000,
