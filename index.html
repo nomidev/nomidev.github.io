@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>스윙계산기</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div id="swingClac">
+      <h1>Swing Calculator</h1>
+      <p>Smash factor 최대치 1.5 기준이며, 단순 계산 방식이므로 참고용으로 사용하시기 바랍니다.</p>
+      <div class="form-group">
+        <label for="bs">Ball speed (m/s)</label>
+        <input type="text" class="form-control" id="bs" v-model="bs" placeholder="Ball speed를 입력하세요">
+      </div>
+      <div class="form-group">
+        <label for="hs">head speed (m/s)</label>
+        <input type="text" class="form-control" id="hs" v-model="hs" readonly>
+      </div>
+      <div class="form-group">
+        <label for="ss">Swing speed (mph)</label>
+        <input type="text" class="form-control" id="ss" v-model="ss" readonly>
+      </div>
+      <div class="form-group">
+        <label for="carry">비거리 (캐리)m</label>
+        <input type="text" class="form-control" id="carry" v-model="carry" readonly>
+      </div>
+      <div class="form-group">
+        <label for="sp">Smash factor </label>
+        <input type="text" class="form-control" id="sp" v-model="sp" readonly>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var vue = new Vue({
+      el: '#swingClac',
+      data: {
+        bs: null,
+      },
+      computed: {
+        hs: function () {
+          return (this.bs / 1.5).toFixed(4);
+        },
+        ss: function () {
+          return (this.hs / 0.444).toFixed(4);
+        },
+        sp: function () {
+          return (this.bs / this.hs).toFixed(2);
+        },
+        carry: function () {
+          return (this.ss * 0.444 * 5).toFixed(4);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
