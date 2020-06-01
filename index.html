@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
   <meta charset="UTF-8">
@@ -44,6 +44,7 @@
         <label for="sp">Smash factor </label>
         <input type="text" class="form-control" id="sp" v-model="sp" readonly>
       </div>
+      <p class="text-center">&copy {{year}} nomi.</p>
     </div>
   </div>
 
@@ -52,6 +53,7 @@
       el: '#swingClac',
       data: {
         bs: null,
+        year: new Date().getFullYear()
       },
       computed: {
         hs: function () {
