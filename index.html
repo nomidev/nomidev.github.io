@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -22,28 +22,102 @@
 <body>
   <div class="container">
     <div id="swingClac">
-      <h1>Swing Calculator</h1>
-      <p>Smash factor 최대치 1.5 기준이며, 단순 계산 방식이므로 참고용으로 사용하시기 바랍니다.</p>
-      <div class="form-group">
-        <label for="bs">Ball speed (m/s)</label>
-        <input type="text" class="form-control" id="bs" v-model="bs" placeholder="Ball speed를 입력하세요">
+      <h1>골프 스피드 계산기</h1>
+      <p>스크린 골프 볼스피드와 Smash factor 최대치 1.5 기준을 이용한 단순 계산 방식이므로 참고용으로 사용하시기 바랍니다.</p>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="bs">Ball speed (m/s)</label>
+            <input type="text" class="form-control" id="bs" v-model="bs" placeholder="Ball speed를 입력하세요">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="bs_mph">mph</label>
+            <input type="text" class="form-control" id="bs_mph" v-model="bs_mph" readonly>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="hs">Head speed (m/s)</label>
-        <input type="text" class="form-control" id="hs" v-model="hs" readonly>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="hs">Head speed (m/s)</label>
+            <input type="text" class="form-control" id="hs" v-model="hs" readonly>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="hs_mph">mph</label>
+            <input type="text" class="form-control" id="hs_mph" v-model="hs_mph" readonly>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="ss">Swing speed (mph)</label>
-        <input type="text" class="form-control" id="ss" v-model="ss" readonly>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="ss">Swing speed (mph)</label>
+            <input type="text" class="form-control" id="ss" v-model="ss" readonly>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="ss_ms">m/s</label>
+            <input type="text" class="form-control" id="ss_ms" v-model="ss_ms" readonly>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="carry">비거리 (캐리)m</label>
-        <input type="text" class="form-control" id="carry" v-model="carry" readonly>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="carry">비거리 (캐리)m</label>
+            <input type="text" class="form-control" id="carry" v-model="carry" readonly>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="carry_yard">비거리 (캐리)yd</label>
+            <input type="text" class="form-control" id="carry_yard" v-model="carry_yard" readonly>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="sp">Smash factor</label>
-        <input type="text" class="form-control" id="sp" v-model="sp" readonly>
-      </div>
+
+      <table class="table table-bordered table-sm">
+        <caption>스윙스피드 별 샤프드 강도</caption>
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">샤프트 강도</th>
+            <th scope="col">드라이버 스윙속도</th>
+            <th scope="col">드라이버 비거리</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>X-Stiff</td>
+            <td>105마일 이상</td>
+            <td>260야드 이상</td>
+          </tr>
+          <tr>
+            <td>Stiff</td>
+            <td>90-105</td>
+            <td>240-260</td>
+          </tr>
+          <tr>
+            <td>Regular</td>
+            <td>80-95</td>
+            <td>210-240</td>
+          </tr>
+          <tr>
+            <td>A-Flex</td>
+            <td>70-85</td>
+            <td>180-210</td>
+          </tr>
+          <tr>
+            <td>Ladies</td>
+            <td>70이하</td>
+            <td>180이하</td>
+          </tr>
+        </tbody>
+      </table>
       <p class="text-center">&copy {{year}} nomi.</p>
     </div>
   </div>
@@ -56,17 +130,29 @@
         year: new Date().getFullYear()
       },
       computed: {
+        bs_mph: function () {
+          return (this.bs * 2.23694).toFixed(2);
+        },
         hs: function () {
           return (this.bs / 1.5).toFixed(2);
         },
+        hs_mph: function () {
+          return (this.bs / 1.5 * 2.23694).toFixed(2);
+        },
         ss: function () {
           return (this.hs / 0.444).toFixed(2);
+        },
+        ss_ms: function () {
+          return (this.hs / 0.444 / 2.23694).toFixed(2);
         },
         sp: function () {
           return (this.bs / this.hs).toFixed(2);
         },
         carry: function () {
           return (this.ss * 0.444 * 5).toFixed(2);
+        },
+        carry_yard: function () {
+          return (this.ss * 0.444 * 5 * 1.09361).toFixed(2);
         }
       }
     })
