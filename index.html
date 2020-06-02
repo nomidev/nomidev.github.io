@@ -41,7 +41,7 @@
         <input type="text" class="form-control" id="carry" v-model="carry" readonly>
       </div>
       <div class="form-group">
-        <label for="sp">Smash factor </label>
+        <label for="sp">Smash factor</label>
         <input type="text" class="form-control" id="sp" v-model="sp" readonly>
       </div>
       <p class="text-center">&copy {{year}} nomi.</p>
@@ -57,16 +57,16 @@
       },
       computed: {
         hs: function () {
-          return (this.bs / 1.5).toFixed(4);
+          return (this.bs / 1.5).toFixed(2);
         },
         ss: function () {
-          return (this.hs / 0.444).toFixed(4);
+          return (this.hs / 0.444).toFixed(2);
         },
         sp: function () {
           return (this.bs / this.hs).toFixed(2);
         },
         carry: function () {
-          return (this.ss * 0.444 * 5).toFixed(4);
+          return (this.ss * 0.444 * 5).toFixed(2);
         }
       }
     })
