@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>굥 출/퇴근 기록부</title>
+</head>
+
+<body>
+    <div class="col-lg-8 mx-auto p-3 py-md-5" id="container">
+        <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+            <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+                <img src="https://www.president.go.kr/assets/images/logo.jpg">
+                <span class="fs-4">굥 출/퇴근 기록부</span>
+            </a>
+        </header>
+
+        <main>
+            <ol class="list-group list-group-numbered">
+                <li v-for="item in dataList" class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{item.date}}</div>
+                        출/퇴근: {{item.go_to_work}} ~ {{item.leave_work}}
+
+                        <p v-if="item.etc.defense_issue" class="my-2">=> {{item.etc.defense_issue}}</p>
+                    </div>
+                    <span v-if="item.overwork" class="badge bg-primary mx-md-1">연장근무</span>
+                    <span v-if="item.late" class="badge bg-danger mx-md-1">지각</span>
+                    <span v-if="item.leave_early" class="badge bg-warning text-dark mx-md-1">조기퇴근</span>
+                </li>
+            </ol>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+    <script>
+        const container = {
+            data() {
+                return {
+                    counter: 0,
+                    dataList: []
+                }
+            },
+            mounted() {
+                var that = this;
+                axios.get('https://nainom.com/yoon_timetables')
+                    .then(function (response) {
+                        console.log(response);
+                        that.dataList = response.data.yoon_timetables;
+                        bootbox.alert("This is the default alert!");
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        bootbox.alert(error);
+                    })
+                    .then(function () {
+                        // 항상 실행되는 영역
+                    });
+            }
+        }
+
+        Vue.createApp(container).mount('#container')
+    </script>
+</body>
+
+</html>
