@@ -11,19 +11,18 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>굥 출/퇴근 기록부</title>
     <style>
-        .loading>img {
+        .spinner-border {
             position: absolute;
+            left: 50%;
             top: 50%;
-            left: calc(50% - 40px);
-            width: 20%;
         }
     </style>
 </head>
 
 <body>
     <div class="col-lg-8 mx-auto p-3 py-md-5" id="container">
-        <div class="loading" v-if="loadingFlag">
-            <img src="https://c.tenor.com/NqKNFHSmbssAAAAi/discord-loading-dots-discord-loading.gif" alt="loading">
+        <div class="spinner-border" role="status" v-if="loadingFlag">
+            <span class="visually-hidden">Loading...</span>
         </div>
 
         <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
