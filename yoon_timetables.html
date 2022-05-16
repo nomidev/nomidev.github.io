@@ -41,7 +41,9 @@
                         <div class="fw-bold">{{item.date}}</div>
                         출/퇴근: {{item.go_to_work}} ~ {{item.leave_work}}
 
-                        <p v-if="item.etc.defense_issue" class="my-2">=> {{item.etc.defense_issue}}</p>
+                        <div v-if="item.etc.defense_issue" class="alert alert-warning" role="alert">
+                            {{item.etc.defense_issue}}
+                        </div>
                     </div>
                     <span v-if="item.overwork" class="badge bg-primary mx-1">연장근무</span>
                     <span v-if="item.late" class="badge bg-danger mx-1">지각</span>
